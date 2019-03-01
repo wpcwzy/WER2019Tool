@@ -16,6 +16,8 @@ namespace WER2019Tool
         public bool hasClicked = false;
         public Button lastButton;
 
+        public int count = 0;
+
         Engine engine = new Engine();
 
         public Form1()
@@ -28,6 +30,8 @@ namespace WER2019Tool
         private void button16_Click(object sender, EventArgs e)
         {
             engine.init();
+            //button16.BackColor = engine.nowMap[count];
+            //count += 1;
         }
 
         private void exit_Click(object sender, EventArgs e)
@@ -38,15 +42,47 @@ namespace WER2019Tool
         private void mapClick(object sender,EventArgs e)
         {
             Button clickedButton = sender as Button;
+            int id,ida;
+
+            ida = Convert.ToInt32(clickedButton.Tag);
             if (hasClicked)
+            {
+                if (lastButton.BackColor != Color.Transparent && clickedButton.BackColor == Color.Transparent)
+                {
+                    id = Convert.ToInt32(lastButton.Tag);
+                    Console.WriteLine(id);
+                    if (engine.nowMap[id+3]==Color.Transparent)
+                    {
+
+                        if (engine.nowMap[ida - 3] != Color.Transparent&&ida!=id+3)
+                        {
+                            engine.draw(lastButton, clickedButton);
+                            label1.Text = "请按下要操作的色块";
+                        }
+                        else
+                            hasClicked = false;
+                    }
+                    else
+                        hasClicked = false;
+                }
+            }
+            else
+            {
+                lastButton = clickedButton;
+                hasClicked = true;
+                label1.Text = "请按下目标位置";
+            }
+        }
+
+        /*
+         * if (hasClicked)
                 engine.draw(lastButton, clickedButton);
             else
             {
                 lastButton = clickedButton;
                 hasClicked = true;
             }
-        }
-
+        */
         private void yellowLabel_Click(object sender, EventArgs e)
         {
             int temp;
@@ -82,6 +118,7 @@ namespace WER2019Tool
     public partial class Engine
     {
         public Color[] map= new Color[15]{ Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray,Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent };
+        public Color[] nowMap = new Color[18];
         public string code;
 
         public void init()
@@ -104,6 +141,17 @@ namespace WER2019Tool
             Form1.form.button15.BackColor = map[14];
             Form1.form.textBox1.Text = "";
             code = "";
+            int i=0;
+            for(i=0;i<15;i++)
+            {
+                nowMap[i] = map[i];
+            }
+            int j;
+            for (j=15;j<=17;j++)
+            {
+                nowMap[j] = Color.Transparent;
+            }
+            Form1.form.label1.Text = "请按下要操作的色块";
         }
 
         public void draw(Button sender,Button target)
@@ -112,6 +160,8 @@ namespace WER2019Tool
             sender.BackColor = Color.Transparent;
             Form1.form.hasClicked = false;
             codeGenerator(sender, target);
+            nowMap[Convert.ToInt32(target.Tag)] = target.BackColor;
+            nowMap[Convert.ToInt32(sender.Tag)] = Color.Transparent;
         }
 
         public void codeGenerator(Button sender,Button target)
