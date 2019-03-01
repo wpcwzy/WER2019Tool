@@ -74,15 +74,6 @@ namespace WER2019Tool
             }
         }
 
-        /*
-         * if (hasClicked)
-                engine.draw(lastButton, clickedButton);
-            else
-            {
-                lastButton = clickedButton;
-                hasClicked = true;
-            }
-        */
         private void yellowLabel_Click(object sender, EventArgs e)
         {
             int temp;
@@ -109,6 +100,11 @@ namespace WER2019Tool
             engine.map[temp] = Color.Gray;
             hasClicked = false;
         }
+
+        private void random_Click(object sender, EventArgs e)
+        {
+            engine.autoRemap();
+        }
     }
 
 
@@ -119,7 +115,14 @@ namespace WER2019Tool
     {
         public Color[] map= new Color[15]{ Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray,Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent };
         public Color[] nowMap = new Color[18];
+        public Color[] acceptColor = { Color.Yellow, Color.Blue, Color.Blue };
         public string code;
+
+        //public bool remapSuccess;
+
+        public int yellowCount = 0;
+        public int blueCount = 0;
+        public int grayCount = 0;
 
         public void init()
         {
@@ -169,6 +172,50 @@ namespace WER2019Tool
             code += string.Format("operator({0}.{1});\r\n", sender.Tag, target.Tag);
             Form1.form.textBox1.Text = code;
            
+        }
+
+        public int GetRandom()
+        {
+            int seekSeek = unchecked((int)DateTime.Now.Ticks);
+            Random ran = new Random(seekSeek);
+            int n = ran.Next(9);
+
+            return n;
+        }
+
+        public void autoRemap()//TODO
+        {
+            int count,i,id;
+            for(i=0;i<15;i++)
+            {
+                map[i] = Color.Transparent;
+            }
+            for (count = 0; count < 3; count++)
+            {
+            Y: id = GetRandom();
+                if (map[id] == Color.Transparent)
+                    map[id] = Color.Yellow;
+                else
+                    goto Y;
+            }
+            for (count = 0; count < 3; count++)
+            {
+            B: id = GetRandom();
+                if (map[id] == Color.Transparent)
+                    map[id] = Color.Blue;
+                else
+                    goto B;
+            }
+            for (count = 0; count < 3; count++)
+            {
+            G: id = GetRandom();
+                if (map[id] == Color.Transparent)
+                    map[id] = Color.Gray;
+                else
+                    goto G;
+            }
+            System.Threading.Thread.Sleep(30);
+            init();
         }
     }
 }

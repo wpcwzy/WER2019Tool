@@ -50,6 +50,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.exit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.random = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -223,10 +224,10 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(12, 11);
+            this.button16.Location = new System.Drawing.Point(12, 15);
             this.button16.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(192, 72);
+            this.button16.Size = new System.Drawing.Size(140, 72);
             this.button16.TabIndex = 15;
             this.button16.Text = "重置";
             this.button16.UseVisualStyleBackColor = true;
@@ -298,11 +299,22 @@
             this.label1.Size = new System.Drawing.Size(0, 38);
             this.label1.TabIndex = 21;
             // 
+            // random
+            // 
+            this.random.Location = new System.Drawing.Point(182, 15);
+            this.random.Name = "random";
+            this.random.Size = new System.Drawing.Size(136, 72);
+            this.random.TabIndex = 22;
+            this.random.Text = "随机打乱";
+            this.random.UseVisualStyleBackColor = true;
+            this.random.Click += new System.EventHandler(this.random_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.random);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.exit);
             this.Controls.Add(this.textBox1);
@@ -356,6 +368,7 @@
         private System.Windows.Forms.Button exit;
         public System.Windows.Forms.TextBox textBox1;
         public System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button random;
     }
 }
 
