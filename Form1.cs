@@ -54,7 +54,7 @@ namespace WER2019Tool
                     if (engine.nowMap[id+3]==Color.Transparent)
                     {
 
-                        if (engine.nowMap[ida - 3] != Color.Transparent&&ida!=id+3)
+                        if (ida<=2||engine.nowMap[ida - 3] != Color.Transparent&&ida!=id+3)
                         {
                             engine.draw(lastButton, clickedButton);
                             label1.Text = "请按下要操作的色块";
