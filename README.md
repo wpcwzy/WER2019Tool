@@ -14,7 +14,10 @@ A tool for WER 2019 addon competition
 ## 右侧代码生成区：
 程序将自动将操作步骤转换为程序代码，格式为"operator(start,target);" 其中，start为起始方块，target为目标位置。如需使用请在机器人端编写对应函数进行适配。start与target为int类型，功能类似id，能够对应每一个位置，如需详情请发issue或联系wpcwzy@gmail.com。谢谢~
 
-# 
+## 下载地址：
+https://github.com/wpcwzy/WER2019Tool/releases
+
+v0.2：添加了自动打乱地图功能~
 
 这个项目目前还有很多潜在bug没有解决，如果您发现bug请发issue，我们会尽快修复
 
