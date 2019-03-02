@@ -12,7 +12,9 @@ A tool for WER 2019 addon competition
 工具会自动将方块还原成上一次更换地图的位置及颜色。
 
 ## 右侧代码生成区：
-程序将自动将操作步骤转换为程序代码，格式为"operator(start,target);" 其中，start为起始方块，target为目标位置。如需使用请在机器人端编写对应函数进行适配。start与target为int类型，功能类似id，能够对应每一个位置，如需详情请发issue或联系wpcwzy@gmail.com。谢谢~
+程序将自动将操作步骤转换为程序代码，格式为"operating(start,target);" 其中，start为起始方块，target为目标位置。如需使用请在机器人端编写对应函数进行适配。start与target为int类型，功能类似id，能够对应每一个位置，如需详情请发issue或联系wpcwzy@gmail.com。谢谢~
+
+!! 重要 !! 之前版本因疏忽将代码名称定为ooperator ，但其是c语言中关键字，先将机器人配套函数名更改为operating，造成不便敬请谅解~
 
 ## 下载地址：
 https://github.com/wpcwzy/WER2019Tool/releases
