@@ -30,8 +30,6 @@ namespace WER2019Tool
         private void button16_Click(object sender, EventArgs e)
         {
             engine.init();
-            //button16.BackColor = engine.nowMap[count];
-            //count += 1;
         }
 
         private void exit_Click(object sender, EventArgs e)
@@ -183,7 +181,7 @@ namespace WER2019Tool
             return n;
         }
 
-        public void autoRemap()//TODO
+        public void autoRemap()
         {
             int count,i,id;
             for(i=0;i<15;i++)
