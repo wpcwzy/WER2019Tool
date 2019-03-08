@@ -30,6 +30,8 @@ namespace WER2019Tool
         private void button16_Click(object sender, EventArgs e)
         {
             engine.init();
+            //button16.BackColor = engine.nowMap[count];
+            //count += 1;
         }
 
         private void exit_Click(object sender, EventArgs e)
@@ -37,10 +39,10 @@ namespace WER2019Tool
             this.Close();
         }
 
-        public bool isLegal(object sender)
+        private void mapClick(object sender,EventArgs e)
         {
             Button clickedButton = sender as Button;
-            int id, ida;
+            int id,ida;
 
             ida = Convert.ToInt32(clickedButton.Tag);
             if (hasClicked)
@@ -49,12 +51,13 @@ namespace WER2019Tool
                 {
                     id = Convert.ToInt32(lastButton.Tag);
                     Console.WriteLine(id);
-                    if (id >= 12 || engine.nowMap[id + 3] == Color.Transparent)
+                    if (engine.nowMap[id+3]==Color.Transparent)
                     {
 
-                        if (ida <= 2 || engine.nowMap[ida - 3] != Color.Transparent && ida != id + 3)
+                        if (ida<=2||engine.nowMap[ida - 3] != Color.Transparent&&ida!=id+3)
                         {
-                            return true;
+                            engine.draw(lastButton, clickedButton);
+                            label1.Text = "请按下要操作的色块";
                         }
                         else
                             hasClicked = false;
@@ -62,18 +65,6 @@ namespace WER2019Tool
                     else
                         hasClicked = false;
                 }
-            }
-            return false;
-        }
-
-        public void mapClick(object sender,EventArgs e)
-        {
-            Button clickedButton = sender as Button;
-            bool legaled = isLegal(sender);
-            if(legaled)
-            {
-                engine.draw(lastButton, clickedButton);
-                label1.Text = "请按下要操作的色块";
             }
             else
             {
@@ -123,9 +114,11 @@ namespace WER2019Tool
     public partial class Engine
     {
         public Color[] map= new Color[15]{ Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray,Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent };
-        public Color[] nowMap = new Color[15];
+        public Color[] nowMap = new Color[18];
         public Color[] acceptColor = { Color.Yellow, Color.Blue, Color.Blue };
         public string code;
+
+        //public bool remapSuccess;
 
         public int yellowCount = 0;
         public int blueCount = 0;
@@ -156,6 +149,11 @@ namespace WER2019Tool
             {
                 nowMap[i] = map[i];
             }
+            int j;
+            for (j=15;j<=17;j++)
+            {
+                nowMap[j] = Color.Transparent;
+            }
             Form1.form.label1.Text = "请按下要操作的色块";
         }
 
@@ -185,7 +183,7 @@ namespace WER2019Tool
             return n;
         }
 
-        public void autoRemap()
+        public void autoRemap()//TODO
         {
             int count,i,id;
             for(i=0;i<15;i++)
