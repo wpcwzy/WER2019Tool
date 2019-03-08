@@ -37,10 +37,10 @@ namespace WER2019Tool
             this.Close();
         }
 
-        private void mapClick(object sender,EventArgs e)
+        public bool isLegal(object sender)
         {
             Button clickedButton = sender as Button;
-            int id,ida;
+            int id, ida;
 
             ida = Convert.ToInt32(clickedButton.Tag);
             if (hasClicked)
@@ -49,13 +49,12 @@ namespace WER2019Tool
                 {
                     id = Convert.ToInt32(lastButton.Tag);
                     Console.WriteLine(id);
-                    if (id>=12||engine.nowMap[id+3]==Color.Transparent)
+                    if (id >= 12 || engine.nowMap[id + 3] == Color.Transparent)
                     {
 
-                        if (ida<=2||engine.nowMap[ida - 3] != Color.Transparent&&ida!=id+3)
+                        if (ida <= 2 || engine.nowMap[ida - 3] != Color.Transparent && ida != id + 3)
                         {
-                            engine.draw(lastButton, clickedButton);
-                            label1.Text = "请按下要操作的色块";
+                            return true;
                         }
                         else
                             hasClicked = false;
@@ -63,6 +62,18 @@ namespace WER2019Tool
                     else
                         hasClicked = false;
                 }
+            }
+            return false;
+        }
+
+        public void mapClick(object sender,EventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            bool legaled = isLegal(sender);
+            if(legaled)
+            {
+                engine.draw(lastButton, clickedButton);
+                label1.Text = "请按下要操作的色块";
             }
             else
             {
