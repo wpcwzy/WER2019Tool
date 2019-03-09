@@ -51,6 +51,7 @@
             this.exit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.random = new System.Windows.Forms.Button();
+            this.help = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -274,7 +275,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(407, 15);
+            this.textBox1.Location = new System.Drawing.Point(407, 12);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(332, 373);
@@ -309,11 +310,23 @@
             this.random.UseVisualStyleBackColor = true;
             this.random.Click += new System.EventHandler(this.random_Click);
             // 
+            // help
+            // 
+            this.help.DialogResult = System.Windows.Forms.DialogResult.No;
+            this.help.Location = new System.Drawing.Point(407, 414);
+            this.help.Name = "help";
+            this.help.Size = new System.Drawing.Size(226, 34);
+            this.help.TabIndex = 23;
+            this.help.Text = "需要帮助？Need help?";
+            this.help.UseVisualStyleBackColor = true;
+            this.help.Click += new System.EventHandler(this.help_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.help);
             this.Controls.Add(this.random);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.exit);
@@ -369,6 +382,7 @@
         public System.Windows.Forms.TextBox textBox1;
         public System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button random;
+        private System.Windows.Forms.Button help;
     }
 }
 

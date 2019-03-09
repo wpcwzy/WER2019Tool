@@ -5,12 +5,12 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-
 namespace WER2019Tool
 {
 
     public partial class Form1 : Form
     {
+
         public static Form1 form;
 
         public bool hasClicked = false;
@@ -20,6 +20,7 @@ namespace WER2019Tool
 
         Engine engine = new Engine();
         arrayConverter arrayConverter = new arrayConverter();
+        helpForm helpForm = new helpForm();
 
         public Form1()
         {
@@ -86,6 +87,11 @@ namespace WER2019Tool
         private void random_Click(object sender, EventArgs e)
         {
             engine.autoRemap();
+        }
+
+        private void help_Click(object sender, EventArgs e)
+        {
+            helpForm.ShowDialog();
         }
     }
 
