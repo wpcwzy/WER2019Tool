@@ -53,10 +53,10 @@
             this.release.AutoSize = true;
             this.release.Location = new System.Drawing.Point(29, 28);
             this.release.Name = "release";
-            this.release.Size = new System.Drawing.Size(375, 15);
+            this.release.Size = new System.Drawing.Size(431, 15);
             this.release.TabIndex = 1;
             this.release.TabStop = true;
-            this.release.Text = "https://github.com/wpcwzy/WER2019Tool/releases";
+            this.release.Text = "https://github.com/wpcwzy/WER2019Tool/releases/latest";
             this.release.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.release_LinkClicked);
             // 
             // label2

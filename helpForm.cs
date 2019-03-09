@@ -14,7 +14,7 @@ namespace WER2019Tool
         private void release_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             release.LinkVisited = true;
-            Process.Start("https://github.com/wpcwzy/WER2019Tool/releases");
+            Process.Start("https://github.com/wpcwzy/WER2019Tool/releases/latest");
         }
 
         private void issue_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
