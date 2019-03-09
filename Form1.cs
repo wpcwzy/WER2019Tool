@@ -35,18 +35,7 @@ namespace WER2019Tool
 
         private void exit_Click(object sender, EventArgs e)
         {
-            //this.Close();
-            Color[,] obj;
-            obj=arrayConverter.colorToMulti(engine.map);
-            int i, j;
-            for(i=0;i<3;i++)
-            {
-                for(j=0;j<5;j++)
-                {
-                    Console.WriteLine(obj[i, j]);
-                }
-                Console.WriteLine("-------");
-            }
+            this.Close();
         }
 
 
@@ -118,14 +107,24 @@ namespace WER2019Tool
                     output[i, j] = input[count];
                     count += 1;
                 }
-                //Console.WriteLine(count);
             }
             return output;
         }
-        //public Color[] multiToColor(Color[,] input)
-        //{
-            
-        //}
+        public Color[] multiToColor(Color[,] input)
+        {
+            Color[] output=new Color[15];
+            int i, j, count;
+            count = 0;
+            for(i=0;i<3;i++)
+            {
+                for(j=0;j<5;j++)
+                {
+                    output[count] = input[i, j];
+                    count += 1;
+                }
+            }
+            return output;
+        }
     }
 
     public partial class Engine
