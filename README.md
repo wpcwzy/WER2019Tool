@@ -19,9 +19,9 @@ A tool for WER 2019 addon competition
 ## 最新下载地址：
 https://github.com/wpcwzy/WER2019Tool/releases
 
-v0.2：添加了自动打乱地图功能~
-v0.2.1：修复了自动生成代码的拼写bug
-v0.2.2：修复了将方块放到一层时触发的数组越界错误
+v0.2：添加了自动打乱地图功能~ \n
+v0.2.1：修复了自动生成代码的拼写bug \n
+v0.2.2：修复了将方块放到一层时触发的数组越界错误 \n
 
 这个项目目前还有很多潜在bug没有解决，如果您发现bug请发issue，我们会尽快修复
 
