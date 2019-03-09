@@ -168,8 +168,7 @@ namespace WER2019Tool
         public void codeGenerator(Button sender,Button target)
         {
             code += string.Format("operating({0}.{1});\r\n", sender.Tag, target.Tag);
-            Form1.form.textBox1.Text = code;
-           
+            Form1.form.textBox1.Text = code;           
         }
 
         public int GetRandom()
