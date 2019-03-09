@@ -45,7 +45,7 @@ namespace WER2019Tool
             bool legaled = engine.isLegal(sender);
             if(legaled)
             {
-                engine.draw(lastButton, clickedButton);
+                engine.moveColor(lastButton, clickedButton);
                 label1.Text = "请按下要操作的色块";
             }
             else
@@ -196,7 +196,7 @@ namespace WER2019Tool
             return false;
         }
 
-        public void draw(Button sender,Button target)
+        public void moveColor(Button sender,Button target)
         {
             target.BackColor = sender.BackColor;
             sender.BackColor = Color.Transparent;
