@@ -37,39 +37,11 @@ namespace WER2019Tool
             this.Close();
         }
 
-        public bool isLegal(object sender)
-        {
-            Button clickedButton = sender as Button;
-            int id, ida;
-
-            ida = Convert.ToInt32(clickedButton.Tag);
-            if (hasClicked)
-            {
-                if (lastButton.BackColor != Color.Transparent && clickedButton.BackColor == Color.Transparent)
-                {
-                    id = Convert.ToInt32(lastButton.Tag);
-                    Console.WriteLine(id);
-                    if (id >= 12 || engine.nowMap[id + 3] == Color.Transparent)
-                    {
-
-                        if (ida <= 2 || engine.nowMap[ida - 3] != Color.Transparent && ida != id + 3)
-                        {
-                            return true;
-                        }
-                        else
-                            hasClicked = false;
-                    }
-                    else
-                        hasClicked = false;
-                }
-            }
-            return false;
-        }
 
         public void mapClick(object sender,EventArgs e)
         {
             Button clickedButton = sender as Button;
-            bool legaled = isLegal(sender);
+            bool legaled = engine.isLegal(sender);
             if(legaled)
             {
                 engine.draw(lastButton, clickedButton);
@@ -157,6 +129,35 @@ namespace WER2019Tool
                 nowMap[i] = map[i];
             }
             Form1.form.label1.Text = "请按下要操作的色块";
+        }
+
+        public bool isLegal(object sender)
+        {
+            Button clickedButton = sender as Button;
+            int id, ida;
+
+            ida = Convert.ToInt32(clickedButton.Tag);
+            if (Form1.form.hasClicked)
+            {
+                if (Form1.form.lastButton.BackColor != Color.Transparent && clickedButton.BackColor == Color.Transparent)
+                {
+                    id = Convert.ToInt32(Form1.form.lastButton.Tag);
+                    Console.WriteLine(id);
+                    if (id >= 12 || nowMap[id + 3] == Color.Transparent)
+                    {
+
+                        if (ida <= 2 || nowMap[ida - 3] != Color.Transparent && ida != id + 3)
+                        {
+                            return true;
+                        }
+                        else
+                            Form1.form.hasClicked = false;
+                    }
+                    else
+                        Form1.form.hasClicked = false;
+                }
+            }
+            return false;
         }
 
         public void draw(Button sender,Button target)
