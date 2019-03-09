@@ -19,6 +19,7 @@ namespace WER2019Tool
         public int count = 0;
 
         Engine engine = new Engine();
+        arrayConverter arrayConverter = new arrayConverter();
 
         public Form1()
         {
@@ -34,7 +35,18 @@ namespace WER2019Tool
 
         private void exit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            //this.Close();
+            Color[,] obj;
+            obj=arrayConverter.colorToMulti(engine.map);
+            int i, j;
+            for(i=0;i<3;i++)
+            {
+                for(j=0;j<5;j++)
+                {
+                    Console.WriteLine(obj[i, j]);
+                }
+                Console.WriteLine("-------");
+            }
         }
 
 
@@ -92,10 +104,35 @@ namespace WER2019Tool
     //************************************************************************************************
 
 
+    public partial class arrayConverter
+    {
+        public Color[,] colorToMulti(Color[] input)
+        {
+            Color[,] output = new Color[3, 5];
+            int i, j,count;
+            count = 0;
+            for(i=0;i<3;i++)
+            {
+                for(j=0;j<5;j++)
+                {
+                    output[i, j] = input[count];
+                    count += 1;
+                }
+                //Console.WriteLine(count);
+            }
+            return output;
+        }
+        //public Color[] multiToColor(Color[,] input)
+        //{
+            
+        //}
+    }
+
     public partial class Engine
     {
         public Color[] map= new Color[15]{ Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray,Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent };
         public Color[] nowMap = new Color[15];
+        public Color[,] calcMap = new Color[3, 5];
         public Color[] acceptColor = { Color.Yellow, Color.Blue, Color.Blue };
         public string code;
 
