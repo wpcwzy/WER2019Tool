@@ -43,7 +43,7 @@ namespace WER2019Tool
         public void mapClick(object sender,EventArgs e)
         {
             Button clickedButton = sender as Button;
-            bool legaled = engine.isLegal(lastButton,sender);
+            bool legaled = engine.isLegal(lastButton,clickedButton);
             if(legaled)
             {
                 engine.moveDraw(lastButton, clickedButton);
@@ -81,7 +81,7 @@ namespace WER2019Tool
             lastButton.BackColor = Color.Gray;
             temp = Convert.ToInt16(lastButton.Tag);
             engine.map[temp] = Color.Gray;
-            hasClicked = false;
+            hasClicked = false;            
         }
 
         private void random_Click(object sender, EventArgs e)
@@ -92,6 +92,12 @@ namespace WER2019Tool
         private void help_Click(object sender, EventArgs e)
         {
             helpForm.ShowDialog();
+        }
+
+        private void debug_Click(object sender, EventArgs e)
+        {
+            engine.move(8, 9);
+            engine.sync();
         }
     }
 
@@ -139,6 +145,7 @@ namespace WER2019Tool
         public Color[] nowMap = new Color[15];
         public Color[,] calcMap = new Color[3, 5];
         public Color[] acceptColor = { Color.Yellow, Color.Blue, Color.Blue };
+        Button[] buttons = new Button[15];
         public string code;
 
         public int yellowCount = 0;
@@ -148,33 +155,39 @@ namespace WER2019Tool
 
         public void init()
         {
+            buttons = new Button[15]{ Form1.form.button1, Form1.form.button2, Form1.form.button3, Form1.form.button4, Form1.form.button5, Form1.form.button6, Form1.form.button7, Form1.form.button8, Form1.form.button9, Form1.form.button10, Form1.form.button11, Form1.form.button12, Form1.form.button13, Form1.form.button14, Form1.form.button15 };
             Console.WriteLine("Init");
-            Form1.form.button1.BackColor = map[0];
-            Form1.form.button2.BackColor = map[1];
-            Form1.form.button3.BackColor = map[2];
-            Form1.form.button4.BackColor = map[3];
-            Form1.form.button5.BackColor = map[4];
-            Form1.form.button6.BackColor = map[5];
-            Form1.form.button7.BackColor = map[6];
-            Form1.form.button8.BackColor = map[7];
-            Form1.form.button9.BackColor = map[8];
-            Form1.form.button10.BackColor = map[9];
-            Form1.form.button11.BackColor = map[10];
-            Form1.form.button12.BackColor = map[11];
-            Form1.form.button13.BackColor = map[12];
-            Form1.form.button14.BackColor = map[13];
-            Form1.form.button15.BackColor = map[14];
-            Form1.form.textBox1.Text = "";
-            code = "";
-            int i=0;
-            for(i=0;i<15;i++)
+            int i = 0;
+            for (i = 0; i < 15; i++)
             {
                 nowMap[i] = map[i];
             }
-            Form1.form.label1.Text = "请按下要操作的色块";
+            sync();
+            Form1.form.textBox1.Text = "";
+            code = "";
         }
 
-        public bool isLegal(Button lastButton,object sender)
+        public void sync()
+        {
+            Form1.form.button1.BackColor = nowMap[0];
+            Form1.form.button2.BackColor = nowMap[1];
+            Form1.form.button3.BackColor = nowMap[2];
+            Form1.form.button4.BackColor = nowMap[3];
+            Form1.form.button5.BackColor = nowMap[4];
+            Form1.form.button6.BackColor = nowMap[5];
+            Form1.form.button7.BackColor = nowMap[6];
+            Form1.form.button8.BackColor = nowMap[7];
+            Form1.form.button9.BackColor = nowMap[8];
+            Form1.form.button10.BackColor = nowMap[9];
+            Form1.form.button11.BackColor = nowMap[10];
+            Form1.form.button12.BackColor = nowMap[11];
+            Form1.form.button13.BackColor = nowMap[12];
+            Form1.form.button14.BackColor = nowMap[13];
+            Form1.form.button15.BackColor = nowMap[14];
+            Console.WriteLine("Sync Success!");
+        }
+
+        public bool isLegal(Button lastButton,Button sender)
         {
             Button clickedButton = sender as Button;
             int id, ida;
@@ -210,6 +223,19 @@ namespace WER2019Tool
             codeGenerator(sender, target);
             nowMap[Convert.ToInt32(target.Tag)] = target.BackColor;
             nowMap[Convert.ToInt32(sender.Tag)] = Color.Transparent;
+        }
+
+        public void move(int sender,int target)
+        {
+            Form1.form.hasClicked = true;
+            bool legal = isLegal(buttons[sender], buttons[target]);
+            if(legal)
+            {
+                buttons[target].BackColor = buttons[sender].BackColor;
+                buttons[sender].BackColor = Color.Transparent;
+                nowMap[Convert.ToInt32(target)] = buttons[target].BackColor;
+                nowMap[Convert.ToInt32(sender)] = Color.Transparent;
+            }
         }
 
         public void codeGenerator(Button sender,Button target)

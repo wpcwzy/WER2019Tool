@@ -297,8 +297,9 @@
             this.label1.Font = new System.Drawing.Font("宋体", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(12, 103);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 38);
+            this.label1.Size = new System.Drawing.Size(368, 38);
             this.label1.TabIndex = 21;
+            this.label1.Text = "请按下要操作的色块";
             // 
             // random
             // 
