@@ -238,6 +238,11 @@ namespace WER2019Tool
             }
         }
 
+        public void multiMove(int senderx,int sendery,int targetx,int targety)
+        {
+            ;//TODO
+        }
+
         public void codeGenerator(Button sender,Button target)
         {
             code += string.Format("operating({0}.{1});\r\n", sender.Tag, target.Tag);
