@@ -63,6 +63,7 @@ namespace WER2019Tool
             lastButton.BackColor = Color.Yellow;
             temp=Convert.ToInt16(lastButton.Tag);
             engine.map[temp] = Color.Yellow;
+            engine.nowMap[temp] = Color.Blue;
             hasClicked = false;
         }
 
@@ -72,6 +73,7 @@ namespace WER2019Tool
             lastButton.BackColor = Color.Blue;
             temp = Convert.ToInt16(lastButton.Tag);
             engine.map[temp] = Color.Blue;
+            engine.nowMap[temp] = Color.Blue;
             hasClicked = false;
         }
 
@@ -81,6 +83,7 @@ namespace WER2019Tool
             lastButton.BackColor = Color.Gray;
             temp = Convert.ToInt16(lastButton.Tag);
             engine.map[temp] = Color.Gray;
+            engine.nowMap[temp] = Color.Blue;
             hasClicked = false;            
         }
 
@@ -233,6 +236,7 @@ namespace WER2019Tool
             {
                 buttons[target].BackColor = buttons[sender].BackColor;
                 buttons[sender].BackColor = Color.Transparent;
+                codeGenerator(buttons[sender], buttons[target]);
                 nowMap[Convert.ToInt32(target)] = buttons[target].BackColor;
                 nowMap[Convert.ToInt32(sender)] = Color.Transparent;
             }
