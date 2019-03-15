@@ -184,7 +184,6 @@ namespace WER2019Tool
                 if (Form1.form.lastButton.BackColor != Color.Transparent && clickedButton.BackColor == Color.Transparent)
                 {
                     id = Convert.ToInt32(Form1.form.lastButton.Tag);
-                    //Console.WriteLine(id);
                     if (id >= 12 || nowMap[id + 3] == Color.Transparent)
                     {
 
