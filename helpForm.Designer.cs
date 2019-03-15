@@ -136,7 +136,7 @@
             this.Controls.Add(this.release);
             this.Controls.Add(this.label1);
             this.Name = "helpForm";
-            this.Text = "helpForm";
+            this.Text = "帮助";
             this.ResumeLayout(false);
             this.PerformLayout();
 

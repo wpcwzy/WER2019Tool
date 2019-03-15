@@ -43,10 +43,10 @@ namespace WER2019Tool
         public void mapClick(object sender,EventArgs e)
         {
             Button clickedButton = sender as Button;
-            bool legaled = engine.isLegal(sender);
+            bool legaled = engine.isLegal(lastButton,sender);
             if(legaled)
             {
-                engine.moveColor(lastButton, clickedButton);
+                engine.moveDraw(lastButton, clickedButton);
                 label1.Text = "请按下要操作的色块";
             }
             else
@@ -145,6 +145,7 @@ namespace WER2019Tool
         public int blueCount = 0;
         public int grayCount = 0;
 
+
         public void init()
         {
             Console.WriteLine("Init");
@@ -173,7 +174,7 @@ namespace WER2019Tool
             Form1.form.label1.Text = "请按下要操作的色块";
         }
 
-        public bool isLegal(object sender)
+        public bool isLegal(Button lastButton,object sender)
         {
             Button clickedButton = sender as Button;
             int id, ida;
@@ -181,9 +182,9 @@ namespace WER2019Tool
             ida = Convert.ToInt32(clickedButton.Tag);
             if (Form1.form.hasClicked)
             {
-                if (Form1.form.lastButton.BackColor != Color.Transparent && clickedButton.BackColor == Color.Transparent)
+                if (lastButton.BackColor != Color.Transparent && clickedButton.BackColor == Color.Transparent)
                 {
-                    id = Convert.ToInt32(Form1.form.lastButton.Tag);
+                    id = Convert.ToInt32(lastButton.Tag);
                     if (id >= 12 || nowMap[id + 3] == Color.Transparent)
                     {
 
@@ -201,7 +202,7 @@ namespace WER2019Tool
             return false;
         }
 
-        public void moveColor(Button sender,Button target)
+        public void moveDraw(Button sender,Button target)
         {
             target.BackColor = sender.BackColor;
             sender.BackColor = Color.Transparent;
