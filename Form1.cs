@@ -46,6 +46,7 @@ namespace WER2019Tool
         private void exit_Click(object sender, EventArgs e)
         {
             this.Close();
+            
         }
 
 
@@ -360,7 +361,6 @@ namespace WER2019Tool
 
         public void multiMove(int senderx,int sendery,int targetx,int targety)
         {
-            ;//TODO
             try
             {
 
