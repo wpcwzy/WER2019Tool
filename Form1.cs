@@ -375,13 +375,13 @@ namespace WER2019Tool
             string result = "";
             for(i=0;i<15;i++)
             {
-                if (nowMap[i] == Color.Blue)
+                if (map[i] == Color.Blue)
                     result = result + "0";
-                if (nowMap[i] == Color.Yellow)
+                if (map[i] == Color.Yellow)
                     result = result + "1";
-                if (nowMap[i] == Color.Gray)
+                if (map[i] == Color.Gray)
                     result = result + "2";
-                if (nowMap[i] == Color.Transparent)
+                if (map[i] == Color.Transparent)
                     result = result + "3";
             }
             return result;
