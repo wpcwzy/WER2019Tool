@@ -52,6 +52,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.random = new System.Windows.Forms.Button();
             this.help = new System.Windows.Forms.Button();
+            this.load = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -283,9 +284,9 @@
             // 
             // exit
             // 
-            this.exit.Location = new System.Drawing.Point(699, 414);
+            this.exit.Location = new System.Drawing.Point(728, 414);
             this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(89, 34);
+            this.exit.Size = new System.Drawing.Size(60, 34);
             this.exit.TabIndex = 20;
             this.exit.Text = "退出";
             this.exit.UseVisualStyleBackColor = true;
@@ -314,19 +315,30 @@
             // help
             // 
             this.help.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.help.Location = new System.Drawing.Point(407, 414);
+            this.help.Location = new System.Drawing.Point(496, 414);
             this.help.Name = "help";
-            this.help.Size = new System.Drawing.Size(226, 34);
+            this.help.Size = new System.Drawing.Size(197, 34);
             this.help.TabIndex = 23;
             this.help.Text = "需要帮助？Need help?";
             this.help.UseVisualStyleBackColor = true;
             this.help.Click += new System.EventHandler(this.help_Click);
+            // 
+            // load
+            // 
+            this.load.Location = new System.Drawing.Point(354, 414);
+            this.load.Name = "load";
+            this.load.Size = new System.Drawing.Size(136, 34);
+            this.load.TabIndex = 24;
+            this.load.Text = "加载官方示例";
+            this.load.UseVisualStyleBackColor = true;
+            this.load.Click += new System.EventHandler(this.load_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.load);
             this.Controls.Add(this.help);
             this.Controls.Add(this.random);
             this.Controls.Add(this.label1);
@@ -384,6 +396,7 @@
         public System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button random;
         private System.Windows.Forms.Button help;
+        private System.Windows.Forms.Button load;
     }
 }
 
