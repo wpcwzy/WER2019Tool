@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Sharpbrake.Client;
+using System.Text;
+using System.Net;
 
 namespace WER2019Tool
 {
@@ -11,15 +13,13 @@ namespace WER2019Tool
 
         public static Form1 form;
 
-        
-
         public bool hasClicked = false;
         public Button lastButton;
 
         public int count = 0;
 
         Engine engine = new Engine();
-        arrayConverter arrayConverter = new arrayConverter();
+        //arrayConverter arrayConverter = new arrayConverter();
         helpForm helpForm = new helpForm();
         public Sharpbrake.Client.AirbrakeNotifier airbrake = new AirbrakeNotifier(new AirbrakeConfig
             {
@@ -64,13 +64,13 @@ namespace WER2019Tool
                     hasClicked = true;
                     label1.Text = "请按下目标位置";
                 }
-
             }
             catch (Exception ex)
             {
                 var notice = airbrake.BuildNotice(ex);
                 var response = airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+                throw ex;
             }
         }
 
@@ -91,6 +91,7 @@ namespace WER2019Tool
                 var notice = airbrake.BuildNotice(ex);
                 var response = airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+                throw ex;
             }
         }
 
@@ -111,6 +112,7 @@ namespace WER2019Tool
                 var notice = airbrake.BuildNotice(ex);
                 var response = airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+                throw ex;
             }
         }
 
@@ -130,6 +132,7 @@ namespace WER2019Tool
                 var notice = airbrake.BuildNotice(ex);
                 var response = airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+                throw ex;
             }
         }
 
@@ -143,10 +146,9 @@ namespace WER2019Tool
             helpForm.ShowDialog();
         }
 
-        private void debug_Click(object sender, EventArgs e)
+        private void load_Click(object sender, EventArgs e)
         {
-            engine.move(8, 9);
-            engine.sync();
+            engine.example();
         }
     }
 
@@ -154,73 +156,123 @@ namespace WER2019Tool
     //************************************************************************************************
 
 
-    public partial class arrayConverter
+    //public partial class arrayConverter
+    //{
+    //    public Color[,] colorToMulti(Color[] input)
+    //    {
+    //        try
+    //        {
+    //            Color[,] output = new Color[3, 5];
+    //            int i, j, count;
+    //            count = 0;
+    //            for (i = 0; i < 3; i++)
+    //            {
+    //                for (j = 0; j < 5; j++)
+    //                {
+    //                    output[i, j] = input[count];
+    //                    count += 1;
+    //                }
+    //            }
+    //            return output;
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            var notice = Form1.form.airbrake.BuildNotice(ex);
+    //            var response = Form1.form.airbrake.NotifyAsync(notice).Result;
+    //            Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+    //            return new Color[1,1];
+    //        }
+    //    }
+    //    public Color[] multiToColor(Color[,] input)
+    //    {
+    //        try
+    //        {
+    //            Color[] output = new Color[15];
+    //            int i, j, count;
+    //            count = 0;
+    //            for (i = 0; i < 3; i++)
+    //            {
+    //                for (j = 0; j < 5; j++)
+    //                {
+    //                    output[count] = input[i, j];
+    //                    count += 1;
+    //                }
+    //            }
+    //            return output;
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            var notice = Form1.form.airbrake.BuildNotice(ex);
+    //            var response = Form1.form.airbrake.NotifyAsync(notice).Result;
+    //            Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+    //            return new Color[1];
+    //        }
+    //    }
+    //}
+
+
+    public class WebClientEx : WebClient
     {
-        public Color[,] colorToMulti(Color[] input)
+        public int Timeout { get; set; }
+
+        protected override WebRequest GetWebRequest(Uri address)
         {
-            try
-            {
-                Color[,] output = new Color[3, 5];
-                int i, j, count;
-                count = 0;
-                for (i = 0; i < 3; i++)
-                {
-                    for (j = 0; j < 5; j++)
-                    {
-                        output[i, j] = input[count];
-                        count += 1;
-                    }
-                }
-                return output;
-            }
-            catch (Exception ex)
-            {
-                var notice = Form1.form.airbrake.BuildNotice(ex);
-                var response = Form1.form.airbrake.NotifyAsync(notice).Result;
-                Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
-                return new Color[1,1];
-            }
+            var request = base.GetWebRequest(address);
+            request.Timeout = Timeout;
+            return request;
         }
-        public Color[] multiToColor(Color[,] input)
+    }
+
+    public partial class network
+    {
+        public void upload(string map,string input)
         {
             try
             {
-                Color[] output = new Color[15];
-                int i, j, count;
-                count = 0;
-                for (i = 0; i < 3; i++)
-                {
-                    for (j = 0; j < 5; j++)
-                    {
-                        output[count] = input[i, j];
-                        count += 1;
-                    }
-                }
-                return output;
+                input = System.Text.RegularExpressions.Regex.Replace(input, "[\r\n\t]", "");
+                string postString = "map=" + map + "&" + "code=" + input;//这里即为传递的参数，可以用工具抓包分析，也可以自己分析，主要是form里面每一个name都要加进来
+                byte[] postData = Encoding.UTF8.GetBytes(postString);//编码，尤其是汉字，事先要看下抓取网页的编码方式
+                string url = "http://wpcwzy.top/data/process.php";//地址
+                WebClientEx webClient = new WebClientEx();
+                webClient.Timeout = 5000;
+                MessageBox.Show("恭喜您成功解题！程序将上传您的解题思路至服务器进行统计研究，期间程序将会假死5秒，属正常现象\n若您有什么意见可以在帮助窗口中进行反馈，感谢您的合作。");
+                webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");//采取POST方式必须加的header，如果改为GET方式的话就去掉这句话即可
+                byte[] responseData = webClient.UploadData(url, "POST", postData);//得到返回字符流
+                string srcString = Encoding.UTF8.GetString(responseData);//解码
+                Console.WriteLine(srcString);
+
+            }
+            catch (WebException)
+            {
+                Console.WriteLine("Upload success with error.");
             }
             catch (Exception ex)
             {
                 var notice = Form1.form.airbrake.BuildNotice(ex);
                 var response = Form1.form.airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
-                return new Color[1];
+                throw ex;
             }
         }
     }
 
     public partial class Engine
     {
-        public Color[] map= new Color[15]{ Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray,Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent };
+        public Color[] map = new Color[15] { Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent };
+        public Color[] targetMap = new Color[15] { Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent };
         public Color[] nowMap = new Color[15];
         public Color[,] calcMap = new Color[3, 5];
         public Color[] acceptColor = { Color.Yellow, Color.Blue, Color.Blue };
         Button[] buttons = new Button[15];
         public string code;
 
+        network network = new network();
+
         public int yellowCount = 0;
         public int blueCount = 0;
         public int grayCount = 0;
 
+        public bool finished = false;
 
         public void init()
         {
@@ -243,6 +295,7 @@ namespace WER2019Tool
                 var notice = Form1.form.airbrake.BuildNotice(ex);
                 var response = Form1.form.airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+                throw ex;
             }
         }
 
@@ -272,6 +325,7 @@ namespace WER2019Tool
                 var notice = Form1.form.airbrake.BuildNotice(ex);
                 var response = Form1.form.airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+                throw ex;
             }
         }
 
@@ -311,9 +365,28 @@ namespace WER2019Tool
                 var response = Form1.form.airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
                 return false;
+                throw ex;
             }
         }
-        //TODO NEXT
+
+        private string convertMap()
+        {
+            int i=0;
+            string result = "";
+            for(i=0;i<15;i++)
+            {
+                if (nowMap[i] == Color.Blue)
+                    result = result + "0";
+                if (nowMap[i] == Color.Yellow)
+                    result = result + "1";
+                if (nowMap[i] == Color.Gray)
+                    result = result + "2";
+                if (nowMap[i] == Color.Transparent)
+                    result = result + "3";
+            }
+            return result;
+        }
+
         public void moveDraw(Button sender,Button target)
         {
             try
@@ -324,37 +397,54 @@ namespace WER2019Tool
                 codeGenerator(sender, target);
                 nowMap[Convert.ToInt32(target.Tag)] = target.BackColor;
                 nowMap[Convert.ToInt32(sender.Tag)] = Color.Transparent;
+                int i = 0;
+                finished = true;
+                for (i = 0; i < 15; i++)
+                {
+                    if(nowMap[i]!=targetMap[i])
+                    {
+                        finished = false;
+                    }
+                }
+                if (finished)
+                {
+                    Console.WriteLine("Upload!map={0},code={1}", convertMap(), map);
+                    network.upload(convertMap(), code);
+                }
+                else
+                    Console.WriteLine("Failed,stop upload");
             }
             catch (Exception ex)
             {
                 var notice = Form1.form.airbrake.BuildNotice(ex);
                 var response = Form1.form.airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+                throw ex;
             }
         }
 
-        public void move(int sender,int target)
-        {
-            try
-            {
-                Form1.form.hasClicked = true;
-                bool legal = isLegal(buttons[sender], buttons[target]);
-                if (legal)
-                {
-                    buttons[target].BackColor = buttons[sender].BackColor;
-                    buttons[sender].BackColor = Color.Transparent;
-                    codeGenerator(buttons[sender], buttons[target]);
-                    nowMap[Convert.ToInt32(target)] = buttons[target].BackColor;
-                    nowMap[Convert.ToInt32(sender)] = Color.Transparent;
-                }
-            }
-            catch (Exception ex)
-            {
-                var notice = Form1.form.airbrake.BuildNotice(ex);
-                var response = Form1.form.airbrake.NotifyAsync(notice).Result;
-                Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
-            }
-        }
+        //public void move(int sender,int target)
+        //{
+        //    try
+        //    {
+        //        Form1.form.hasClicked = true;
+        //        bool legal = isLegal(buttons[sender], buttons[target]);
+        //        if (legal)
+        //        {
+        //            buttons[target].BackColor = buttons[sender].BackColor;
+        //            buttons[sender].BackColor = Color.Transparent;
+        //            codeGenerator(buttons[sender], buttons[target]);
+        //            nowMap[Convert.ToInt32(target)] = buttons[target].BackColor;
+        //            nowMap[Convert.ToInt32(sender)] = Color.Transparent;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var notice = Form1.form.airbrake.BuildNotice(ex);
+        //        var response = Form1.form.airbrake.NotifyAsync(notice).Result;
+        //        Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+        //    }
+        //}
 
         public void multiMove(int senderx,int sendery,int targetx,int targety)
         {
@@ -367,6 +457,7 @@ namespace WER2019Tool
                 var notice = Form1.form.airbrake.BuildNotice(ex);
                 var response = Form1.form.airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+                throw ex;
             }
         }
 
@@ -382,6 +473,7 @@ namespace WER2019Tool
                 var notice = Form1.form.airbrake.BuildNotice(ex);
                 var response = Form1.form.airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+                throw ex;
             }
         }
 
@@ -401,6 +493,7 @@ namespace WER2019Tool
                 var response = Form1.form.airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
                 return 0;
+                throw ex;
             }
         }
 
@@ -445,7 +538,25 @@ namespace WER2019Tool
                 var notice = Form1.form.airbrake.BuildNotice(ex);
                 var response = Form1.form.airbrake.NotifyAsync(notice).Result;
                 Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+                throw ex;
             }
+        }
+        
+        public void example()
+        {
+            map[0] = Color.Gray;
+            map[1] = Color.Blue;
+            map[2] = Color.Gray;
+            map[3] = Color.Yellow;
+            map[4] = Color.Yellow;
+            map[5] = Color.Yellow;
+            map[6] = Color.Blue;
+            map[7] = Color.Gray;
+            map[8] = Color.Blue;
+            int i=9;
+            for (i = 9; i < 15; i++)
+                map[i] = Color.Transparent;
+            init();
         }
     }
 }
