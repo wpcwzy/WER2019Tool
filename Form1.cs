@@ -465,7 +465,7 @@ namespace WER2019Tool
         {
             try
             {
-                code += string.Format("operating({0}.{1});\r\n", sender.Tag, target.Tag);
+                code += string.Format("operating({0},{1});\r\n", sender.Tag, target.Tag);
                 Form1.form.textBox1.Text = code;
             }
             catch(Exception ex)
