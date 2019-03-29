@@ -249,7 +249,7 @@ namespace WER2019Tool
                 byte[] postData = Encoding.UTF8.GetBytes(postString);//编码，尤其是汉字，事先要看下抓取网页的编码方式
                 string url = "http://wpcwzy.top/data/process.php";//地址
                 WebClientEx webClient = new WebClientEx();
-                webClient.Timeout = 6300;
+                webClient.Timeout = 5500;
                 MessageBox.Show("恭喜您成功解题！程序将上传您的解题思路至服务器进行统计研究，期间程序将会假死5秒，属正常现象\n若您有什么意见可以在帮助窗口中进行反馈，感谢您的合作。");
                 webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");//采取POST方式必须加的header，如果改为GET方式的话就去掉这句话即可
                 byte[] responseData = webClient.UploadData(url, "POST", postData);//得到返回字符流
