@@ -150,6 +150,21 @@ namespace WER2019Tool
         {
             engine.example();
         }
+
+        private void codeMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (codeMode.Checked)
+            {
+                engine.codeConverter(false);
+                engine.natureMode = false;
+            }
+            else
+            {
+                engine.codeConverter(true);
+                engine.natureMode = true;
+            }
+            textBox1.Text = engine.code;
+        }
     }
 
 
@@ -234,7 +249,7 @@ namespace WER2019Tool
                 byte[] postData = Encoding.UTF8.GetBytes(postString);//编码，尤其是汉字，事先要看下抓取网页的编码方式
                 string url = "http://wpcwzy.top/data/process.php";//地址
                 WebClientEx webClient = new WebClientEx();
-                webClient.Timeout = 5000;
+                webClient.Timeout = 6000;
                 MessageBox.Show("恭喜您成功解题！程序将上传您的解题思路至服务器进行统计研究，期间程序将会假死5秒，属正常现象\n若您有什么意见可以在帮助窗口中进行反馈，感谢您的合作。");
                 webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");//采取POST方式必须加的header，如果改为GET方式的话就去掉这句话即可
                 byte[] responseData = webClient.UploadData(url, "POST", postData);//得到返回字符流
@@ -265,6 +280,7 @@ namespace WER2019Tool
         public Color[] acceptColor = { Color.Yellow, Color.Blue, Color.Blue };
         Button[] buttons = new Button[15];
         public string code;
+        public bool natureMode = false;//False=code mode, True=nature mode;
 
         network network = new network();
 
@@ -423,30 +439,30 @@ namespace WER2019Tool
             }
         }
 
-        //public void move(int sender,int target)
-        //{
-        //    try
-        //    {
-        //        Form1.form.hasClicked = true;
-        //        bool legal = isLegal(buttons[sender], buttons[target]);
-        //        if (legal)
-        //        {
-        //            buttons[target].BackColor = buttons[sender].BackColor;
-        //            buttons[sender].BackColor = Color.Transparent;
-        //            codeGenerator(buttons[sender], buttons[target]);
-        //            nowMap[Convert.ToInt32(target)] = buttons[target].BackColor;
-        //            nowMap[Convert.ToInt32(sender)] = Color.Transparent;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        var notice = Form1.form.airbrake.BuildNotice(ex);
-        //        var response = Form1.form.airbrake.NotifyAsync(notice).Result;
-        //        Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
-        //    }
-        //}
+        public void move(int sender, int target)
+        {
+            try
+            {
+                Form1.form.hasClicked = true;
+                bool legal = isLegal(buttons[sender], buttons[target]);
+                if (legal)
+                {
+                    buttons[target].BackColor = buttons[sender].BackColor;
+                    buttons[sender].BackColor = Color.Transparent;
+                    codeGenerator(buttons[sender], buttons[target]);
+                    nowMap[Convert.ToInt32(target)] = buttons[target].BackColor;
+                    nowMap[Convert.ToInt32(sender)] = Color.Transparent;
+                }
+            }
+            catch (Exception ex)
+            {
+                var notice = Form1.form.airbrake.BuildNotice(ex);
+                var response = Form1.form.airbrake.NotifyAsync(notice).Result;
+                Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+            }
+        }
 
-        public void multiMove(int senderx,int sendery,int targetx,int targety)
+        public void multiMove(int senderx, int sendery, int targetx, int targety)
         {
             try
             {
@@ -461,12 +477,40 @@ namespace WER2019Tool
             }
         }
 
+        public void codeConverter(bool targetLanguage)//False:code ,True:nature
+        {
+            if(targetLanguage)
+            {
+                code = code.Replace("operating(", "将第");
+                code = code.Replace(",", "号方块移至第");
+                code = code.Replace(");", "号位置");
+                Console.WriteLine("Convert to nature");
+                Console.WriteLine(code);
+            }
+            else
+            {
+                code = code.Replace("将第", "operating(");
+                code = code.Replace("号方块移至第", ",");
+                code = code.Replace("号位置", ");");
+                Console.WriteLine("Convert to code");
+                Console.WriteLine(code);
+            }
+        }
+
         public void codeGenerator(Button sender,Button target)
         {
             try
             {
-                code += string.Format("operating({0},{1});\r\n", sender.Tag, target.Tag);
-                Form1.form.textBox1.Text = code;
+                if(!natureMode)
+                {
+                    code += string.Format("operating({0},{1});\r\n", sender.Tag, target.Tag);
+                    Form1.form.textBox1.Text = code;
+                }
+                else
+                {
+                    code += string.Format("将第{0}号方块移至第{1}号位置\r\n", sender.Tag, target.Tag);
+                    Form1.form.textBox1.Text = code;
+                }
             }
             catch(Exception ex)
             {

@@ -53,12 +53,16 @@
             this.random = new System.Windows.Forms.Button();
             this.help = new System.Windows.Forms.Button();
             this.load = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.codeMode = new System.Windows.Forms.RadioButton();
+            this.natureMode = new System.Windows.Forms.RadioButton();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FloralWhite;
-            this.button1.Location = new System.Drawing.Point(11, 397);
+            this.button1.Location = new System.Drawing.Point(11, 487);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(108, 42);
@@ -69,7 +73,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(125, 395);
+            this.button2.Location = new System.Drawing.Point(125, 485);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(108, 42);
@@ -80,7 +84,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(240, 395);
+            this.button3.Location = new System.Drawing.Point(240, 485);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(108, 42);
@@ -92,7 +96,7 @@
             // button4
             // 
             this.button4.BackColor = System.Drawing.SystemColors.Control;
-            this.button4.Location = new System.Drawing.Point(12, 346);
+            this.button4.Location = new System.Drawing.Point(12, 436);
             this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(108, 42);
@@ -103,7 +107,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(125, 346);
+            this.button5.Location = new System.Drawing.Point(125, 436);
             this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(108, 42);
@@ -114,7 +118,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(240, 346);
+            this.button6.Location = new System.Drawing.Point(240, 436);
             this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(108, 42);
@@ -127,7 +131,7 @@
             // 
             this.button7.BackColor = System.Drawing.SystemColors.Control;
             this.button7.ForeColor = System.Drawing.Color.Azure;
-            this.button7.Location = new System.Drawing.Point(12, 298);
+            this.button7.Location = new System.Drawing.Point(12, 388);
             this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(108, 42);
@@ -138,7 +142,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(125, 298);
+            this.button8.Location = new System.Drawing.Point(125, 388);
             this.button8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(108, 42);
@@ -149,7 +153,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(240, 298);
+            this.button9.Location = new System.Drawing.Point(240, 388);
             this.button9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(108, 42);
@@ -160,7 +164,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(12, 248);
+            this.button10.Location = new System.Drawing.Point(12, 338);
             this.button10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(108, 42);
@@ -171,7 +175,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(125, 248);
+            this.button11.Location = new System.Drawing.Point(125, 338);
             this.button11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(108, 42);
@@ -182,7 +186,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(240, 248);
+            this.button12.Location = new System.Drawing.Point(240, 338);
             this.button12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(108, 42);
@@ -193,7 +197,7 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(12, 199);
+            this.button13.Location = new System.Drawing.Point(12, 289);
             this.button13.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(108, 42);
@@ -204,7 +208,7 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(125, 199);
+            this.button14.Location = new System.Drawing.Point(125, 289);
             this.button14.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(108, 42);
@@ -215,7 +219,7 @@
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(240, 199);
+            this.button15.Location = new System.Drawing.Point(240, 289);
             this.button15.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(108, 42);
@@ -226,7 +230,7 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(12, 15);
+            this.button16.Location = new System.Drawing.Point(12, 105);
             this.button16.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(140, 72);
@@ -240,7 +244,7 @@
             this.yellowLabel.AutoSize = true;
             this.yellowLabel.BackColor = System.Drawing.Color.Yellow;
             this.yellowLabel.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yellowLabel.Location = new System.Drawing.Point(36, 160);
+            this.yellowLabel.Location = new System.Drawing.Point(36, 250);
             this.yellowLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.yellowLabel.Name = "yellowLabel";
             this.yellowLabel.Size = new System.Drawing.Size(55, 37);
@@ -253,7 +257,7 @@
             this.blueLabel.AutoSize = true;
             this.blueLabel.BackColor = System.Drawing.Color.Blue;
             this.blueLabel.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.blueLabel.Location = new System.Drawing.Point(149, 160);
+            this.blueLabel.Location = new System.Drawing.Point(149, 250);
             this.blueLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.blueLabel.Name = "blueLabel";
             this.blueLabel.Size = new System.Drawing.Size(55, 37);
@@ -266,7 +270,7 @@
             this.grayLabel.AutoSize = true;
             this.grayLabel.BackColor = System.Drawing.Color.Gray;
             this.grayLabel.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.grayLabel.Location = new System.Drawing.Point(263, 160);
+            this.grayLabel.Location = new System.Drawing.Point(263, 250);
             this.grayLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.grayLabel.Name = "grayLabel";
             this.grayLabel.Size = new System.Drawing.Size(55, 37);
@@ -276,7 +280,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(407, 12);
+            this.textBox1.Location = new System.Drawing.Point(407, 102);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(332, 373);
@@ -284,7 +288,7 @@
             // 
             // exit
             // 
-            this.exit.Location = new System.Drawing.Point(728, 414);
+            this.exit.Location = new System.Drawing.Point(728, 504);
             this.exit.Name = "exit";
             this.exit.Size = new System.Drawing.Size(60, 34);
             this.exit.TabIndex = 20;
@@ -296,7 +300,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(12, 103);
+            this.label1.Location = new System.Drawing.Point(12, 193);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(368, 38);
             this.label1.TabIndex = 21;
@@ -304,7 +308,7 @@
             // 
             // random
             // 
-            this.random.Location = new System.Drawing.Point(182, 15);
+            this.random.Location = new System.Drawing.Point(182, 105);
             this.random.Name = "random";
             this.random.Size = new System.Drawing.Size(136, 72);
             this.random.TabIndex = 22;
@@ -315,7 +319,7 @@
             // help
             // 
             this.help.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.help.Location = new System.Drawing.Point(496, 414);
+            this.help.Location = new System.Drawing.Point(496, 504);
             this.help.Name = "help";
             this.help.Size = new System.Drawing.Size(197, 34);
             this.help.TabIndex = 23;
@@ -325,7 +329,7 @@
             // 
             // load
             // 
-            this.load.Location = new System.Drawing.Point(354, 414);
+            this.load.Location = new System.Drawing.Point(354, 504);
             this.load.Name = "load";
             this.load.Size = new System.Drawing.Size(136, 34);
             this.load.TabIndex = 24;
@@ -333,11 +337,48 @@
             this.load.UseVisualStyleBackColor = true;
             this.load.Click += new System.EventHandler(this.load_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.natureMode);
+            this.groupBox1.Controls.Add(this.codeMode);
+            this.groupBox1.Location = new System.Drawing.Point(407, 13);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(332, 83);
+            this.groupBox1.TabIndex = 25;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "文本模式";
+            // 
+            // codeMode
+            // 
+            this.codeMode.AutoSize = true;
+            this.codeMode.Checked = true;
+            this.codeMode.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.codeMode.Location = new System.Drawing.Point(6, 33);
+            this.codeMode.Name = "codeMode";
+            this.codeMode.Size = new System.Drawing.Size(131, 28);
+            this.codeMode.TabIndex = 0;
+            this.codeMode.TabStop = true;
+            this.codeMode.Text = "代码模式";
+            this.codeMode.UseVisualStyleBackColor = true;
+            this.codeMode.CheckedChanged += new System.EventHandler(this.codeMode_CheckedChanged);
+            // 
+            // natureMode
+            // 
+            this.natureMode.AutoSize = true;
+            this.natureMode.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.natureMode.Location = new System.Drawing.Point(195, 33);
+            this.natureMode.Name = "natureMode";
+            this.natureMode.Size = new System.Drawing.Size(131, 28);
+            this.natureMode.TabIndex = 1;
+            this.natureMode.Text = "文本模式";
+            this.natureMode.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 554);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.load);
             this.Controls.Add(this.help);
             this.Controls.Add(this.random);
@@ -366,6 +407,8 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Tool";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -397,6 +440,9 @@
         private System.Windows.Forms.Button random;
         private System.Windows.Forms.Button help;
         private System.Windows.Forms.Button load;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton natureMode;
+        private System.Windows.Forms.RadioButton codeMode;
     }
 }
 
