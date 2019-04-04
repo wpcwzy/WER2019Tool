@@ -257,7 +257,7 @@ namespace WER2019Tool
         {
             int redo = 0;
             MessageBox.Show("恭喜您成功解题！程序将上传您的解题思路至服务器进行统计研究\n若您有什么意见可以在帮助窗口中进行反馈，感谢您的合作。");
-            while (redo<=3)
+            while (redo<=5)
             {
                 try
                 {
@@ -267,7 +267,7 @@ namespace WER2019Tool
                     string url = "http://wpcwzy.top/data/process.php" + postString;//地址
                     Console.WriteLine("Server URL:{0}", url);
                     WebClientEx webClient = new WebClientEx();
-                    webClient.Timeout = 7000;
+                    webClient.Timeout = 3500;
                     byte[] responseData = webClient.DownloadData(url);//得到返回字符流
                     string srcString = Encoding.UTF8.GetString(responseData);//解码
                     Console.WriteLine(srcString);
@@ -291,14 +291,14 @@ namespace WER2019Tool
         public string downloadMap(string map)
         {
             int redo = 0;
-            while (redo<=3)
+            while (redo<=5)
             {
                 try
                 {
                     string url = "http://wpcwzy.top/data/" + map;//地址
                     Console.WriteLine("Server URL:{0}", url);
                     WebClientEx webClient = new WebClientEx();
-                    webClient.Timeout = 7000;
+                    webClient.Timeout = 3500;
                     byte[] responseData = webClient.DownloadData(url);//得到返回字符流
                     string srcString = Encoding.UTF8.GetString(responseData);//解码
                     Console.WriteLine(srcString.Substring(16, srcString.Length - 16));
