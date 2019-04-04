@@ -169,11 +169,14 @@ namespace WER2019Tool
             string downloadCode;
             network network = new network();
             textBox1.Text += "=======开始下载=======\r\n";
+            engine.code += "=======开始下载=======\r\n";
             downloadCode =network.downloadMap(engine.convertMap());
             textBox1.Text += downloadCode;
             engine.code += downloadCode;
             textBox1.Text += "\r\n";
             textBox1.Text += "=======下载结束=======\r\n";
+            engine.code += "\r\n";
+            engine.code += "=======下载结束=======\r\n";
         }
     }
 
