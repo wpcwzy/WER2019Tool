@@ -256,7 +256,8 @@ namespace WER2019Tool
         public void upload(string map,string input)
         {
             int redo = 0;
-            while(redo<=3)
+            MessageBox.Show("恭喜您成功解题！程序将上传您的解题思路至服务器进行统计研究\n若您有什么意见可以在帮助窗口中进行反馈，感谢您的合作。");
+            while (redo<=3)
             {
                 try
                 {
@@ -267,7 +268,6 @@ namespace WER2019Tool
                     Console.WriteLine("Server URL:{0}", url);
                     WebClientEx webClient = new WebClientEx();
                     webClient.Timeout = 7000;
-                    MessageBox.Show("恭喜您成功解题！程序将上传您的解题思路至服务器进行统计研究\n若您有什么意见可以在帮助窗口中进行反馈，感谢您的合作。");
                     byte[] responseData = webClient.DownloadData(url);//得到返回字符流
                     string srcString = Encoding.UTF8.GetString(responseData);//解码
                     Console.WriteLine(srcString);
