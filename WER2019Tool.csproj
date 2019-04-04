@@ -28,8 +28,8 @@
     <ErrorReportUrl>https://www.github.com/wpcwzy/WER2019Tool</ErrorReportUrl>
     <ProductName>WER2019智能分拣规划工具</ProductName>
     <PublisherName>王品呈</PublisherName>
-    <ApplicationRevision>4</ApplicationRevision>
-    <ApplicationVersion>0.2.7.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>0.3.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

@@ -32,7 +32,6 @@ namespace WER2019Tool
             InitializeComponent();
             form = this;
             engine.init();
-
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -165,6 +164,17 @@ namespace WER2019Tool
             }
             textBox1.Text = engine.code;
         }
+        private void download_Click(object sender, EventArgs e)
+        {
+            string downloadCode;
+            network network = new network();
+            textBox1.Text += "=======开始下载=======\r\n";
+            downloadCode =network.downloadMap(engine.convertMap());
+            textBox1.Text += downloadCode;
+            engine.code += downloadCode;
+            textBox1.Text += "\r\n";
+            textBox1.Text += "=======下载结束=======\r\n";
+        }
     }
 
 
@@ -242,32 +252,70 @@ namespace WER2019Tool
     {
         public void upload(string map,string input)
         {
-            try
+            int redo = 0;
+            while(redo<=3)
             {
-                input = System.Text.RegularExpressions.Regex.Replace(input, "[\r\n\t]", "");
-                string postString = "map=" + map + "&" + "code=" + input;//这里即为传递的参数，可以用工具抓包分析，也可以自己分析，主要是form里面每一个name都要加进来
-                byte[] postData = Encoding.UTF8.GetBytes(postString);//编码，尤其是汉字，事先要看下抓取网页的编码方式
-                string url = "http://wpcwzy.top/data/process.php";//地址
-                WebClientEx webClient = new WebClientEx();
-                webClient.Timeout = 5500;
-                MessageBox.Show("恭喜您成功解题！程序将上传您的解题思路至服务器进行统计研究，期间程序将会假死5秒，属正常现象\n若您有什么意见可以在帮助窗口中进行反馈，感谢您的合作。");
-                webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");//采取POST方式必须加的header，如果改为GET方式的话就去掉这句话即可
-                byte[] responseData = webClient.UploadData(url, "POST", postData);//得到返回字符流
-                string srcString = Encoding.UTF8.GetString(responseData);//解码
-                Console.WriteLine(srcString);
-
+                try
+                {
+                    //input = System.Text.RegularExpressions.Regex.Replace(input, "[\r\n\t]", "");
+                    string postString = "?map=" + map + "&" + "code=" + input;//这里即为传递的参数，可以用工具抓包分析，也可以自己分析，主要是form里面每一个name都要加进来
+                    byte[] postData = Encoding.UTF8.GetBytes(postString);//编码，尤其是汉字，事先要看下抓取网页的编码方式
+                    string url = "http://wpcwzy.top/data/process.php" + postString;//地址
+                    Console.WriteLine("Server URL:{0}", url);
+                    WebClientEx webClient = new WebClientEx();
+                    webClient.Timeout = 7000;
+                    MessageBox.Show("恭喜您成功解题！程序将上传您的解题思路至服务器进行统计研究\n若您有什么意见可以在帮助窗口中进行反馈，感谢您的合作。");
+                    byte[] responseData = webClient.DownloadData(url);//得到返回字符流
+                    string srcString = Encoding.UTF8.GetString(responseData);//解码
+                    Console.WriteLine(srcString);
+                    break;
+                }
+                catch(WebException)
+                {
+                    redo++;
+                    Console.WriteLine("Retry:{0} Time(s)", redo);
+                    continue;
+                }
+                catch (Exception ex)
+                {
+                    var notice = Form1.form.airbrake.BuildNotice(ex);
+                    var response = Form1.form.airbrake.NotifyAsync(notice).Result;
+                    Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+                    throw ex;
+                }
             }
-            catch (WebException)
+        }
+        public string downloadMap(string map)
+        {
+            int redo = 0;
+            while (redo<=3)
             {
-                Console.WriteLine("Upload success with error.");
+                try
+                {
+                    string url = "http://wpcwzy.top/data/" + map;//地址
+                    Console.WriteLine("Server URL:{0}", url);
+                    WebClientEx webClient = new WebClientEx();
+                    webClient.Timeout = 7000;
+                    byte[] responseData = webClient.DownloadData(url);//得到返回字符流
+                    string srcString = Encoding.UTF8.GetString(responseData);//解码
+                    Console.WriteLine(srcString.Substring(16, srcString.Length - 16));
+                    return srcString.Substring(16, srcString.Length - 16);
+                }
+                catch (WebException)
+                {
+                    redo++;
+                    Console.WriteLine("Retry:{0} Time(s)", redo);
+                    continue;
+                }
+                catch (Exception ex)
+                {
+                    var notice = Form1.form.airbrake.BuildNotice(ex);
+                    var response = Form1.form.airbrake.NotifyAsync(notice).Result;
+                    Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
+                    throw ex;
+                }
             }
-            catch (Exception ex)
-            {
-                var notice = Form1.form.airbrake.BuildNotice(ex);
-                var response = Form1.form.airbrake.NotifyAsync(notice).Result;
-                Console.WriteLine("Status: {0}, Id: {1}, Url: {2}", response.Status, response.Id, response.Url);
-                throw ex;
-            }
+            return "";
         }
     }
 
@@ -385,7 +433,7 @@ namespace WER2019Tool
             }
         }
 
-        private string convertMap()
+        public string convertMap()
         {
             int i=0;
             string result = "";

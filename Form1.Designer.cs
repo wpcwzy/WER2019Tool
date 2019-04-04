@@ -56,6 +56,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.natureMode = new System.Windows.Forms.RadioButton();
             this.codeMode = new System.Windows.Forms.RadioButton();
+            this.download = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -260,7 +261,7 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(12, 105);
+            this.button16.Location = new System.Drawing.Point(12, 23);
             this.button16.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(140, 72);
@@ -403,11 +404,22 @@
             this.codeMode.UseVisualStyleBackColor = true;
             this.codeMode.CheckedChanged += new System.EventHandler(this.codeMode_CheckedChanged);
             // 
+            // download
+            // 
+            this.download.Location = new System.Drawing.Point(12, 105);
+            this.download.Name = "download";
+            this.download.Size = new System.Drawing.Size(140, 72);
+            this.download.TabIndex = 26;
+            this.download.Text = "下载当前参考解题思路";
+            this.download.UseVisualStyleBackColor = true;
+            this.download.Click += new System.EventHandler(this.download_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 554);
+            this.Controls.Add(this.download);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.load);
             this.Controls.Add(this.help);
@@ -473,6 +485,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton natureMode;
         private System.Windows.Forms.RadioButton codeMode;
+        private System.Windows.Forms.Button download;
     }
 }
 
