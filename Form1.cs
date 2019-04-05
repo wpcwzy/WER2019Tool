@@ -261,7 +261,8 @@ namespace WER2019Tool
             {
                 try
                 {
-                    //input = System.Text.RegularExpressions.Regex.Replace(input, "[\r\n\t]", "");
+                    input = System.Text.RegularExpressions.Regex.Replace(input, "=======开始下载=======", "");
+                    input = System.Text.RegularExpressions.Regex.Replace(input, "=======下载结束=======", "");
                     string postString = "?map=" + map + "&" + "code=" + input;//这里即为传递的参数，可以用工具抓包分析，也可以自己分析，主要是form里面每一个name都要加进来
                     byte[] postData = Encoding.UTF8.GetBytes(postString);//编码，尤其是汉字，事先要看下抓取网页的编码方式
                     string url = "http://wpcwzy.top/data/process.php" + postString;//地址
