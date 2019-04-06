@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Sharpbrake.Client;
+using System;
 using System.Drawing;
-using System.Windows.Forms;
-using Sharpbrake.Client;
-using System.Text;
 using System.Net;
+using System.Text;
+using System.Windows.Forms;
 
 namespace WER2019Tool
 {
@@ -263,14 +263,14 @@ namespace WER2019Tool
                 {
                     input = System.Text.RegularExpressions.Regex.Replace(input, "=======开始下载=======", "\0");
                     input = System.Text.RegularExpressions.Regex.Replace(input, "=======下载结束=======", "\0");
-                    string postString = "?map=" + map + "&" + "code=" + input;//这里即为传递的参数，可以用工具抓包分析，也可以自己分析，主要是form里面每一个name都要加进来
-                    byte[] postData = Encoding.UTF8.GetBytes(postString);//编码，尤其是汉字，事先要看下抓取网页的编码方式
-                    string url = "http://wpcwzy.top/data/process.php" + postString;//地址
+                    string postString = "?map=" + map + "&" + "code=" + input; //这里即为传递的参数，可以用工具抓包分析，也可以自己分析，主要是form里面每一个name都要加进来
+                    byte[] postData = Encoding.UTF8.GetBytes(postString); //编码，尤其是汉字，事先要看下抓取网页的编码方式
+                    string url = "http://wpcwzy.top/data/process.php" + postString; //地址
                     Console.WriteLine("Server URL:{0}", url);
                     WebClientEx webClient = new WebClientEx();
                     webClient.Timeout = 3500;
-                    byte[] responseData = webClient.DownloadData(url);//得到返回字符流
-                    string srcString = Encoding.UTF8.GetString(responseData);//解码
+                    byte[] responseData = webClient.DownloadData(url); //得到返回字符流
+                    string srcString = Encoding.UTF8.GetString(responseData); //解码
                     Console.WriteLine(srcString);
                     break;
                 }
@@ -296,12 +296,12 @@ namespace WER2019Tool
             {
                 try
                 {
-                    string url = "http://wpcwzy.top/data/" + map;//地址
+                    string url = "http://wpcwzy.top/data/" + map; //地址
                     Console.WriteLine("Server URL:{0}", url);
                     WebClientEx webClient = new WebClientEx();
                     webClient.Timeout = 3500;
-                    byte[] responseData = webClient.DownloadData(url);//得到返回字符流
-                    string srcString = Encoding.UTF8.GetString(responseData);//解码
+                    byte[] responseData = webClient.DownloadData(url); //得到返回字符流
+                    string srcString = Encoding.UTF8.GetString(responseData); //解码
                     Console.WriteLine(srcString.Substring(16, srcString.Length - 16));
                     return srcString.Substring(16, srcString.Length - 16);
                 }
@@ -337,7 +337,7 @@ namespace WER2019Tool
         public Color[] acceptColor = { Color.Yellow, Color.Blue, Color.Blue };
         Button[] buttons = new Button[15];
         public string code;
-        public bool natureMode = false;//False=code mode, True=nature mode;
+        public bool natureMode = false; //False=code mode, True=nature mode;
 
         network network = new network();
 
@@ -418,7 +418,7 @@ namespace WER2019Tool
                         if (id >= 12 || nowMap[id + 3] == Color.Transparent)
                         {
 
-                            if (ida <= 2 || nowMap[ida - 3] != Color.Transparent && ida != id + 3)
+                            if ((ida <= 2 || nowMap[ida - 3] != Color.Transparent) && ida != id + 3)
                             {
                                 return true;
                             }
@@ -446,7 +446,7 @@ namespace WER2019Tool
         {
             int i=0;
             string result = "";
-            for(i=0;i<15;i++)
+            for(i=0; i<15; i++)
             {
                 if (map[i] == Color.Blue)
                     result = result + "0";
