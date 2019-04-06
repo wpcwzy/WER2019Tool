@@ -34,5 +34,11 @@ namespace WER2019Tool
             mail2.LinkVisited = true;
             Process.Start("mailto:wpcwzy@gmail.com");
         }
+
+        private void HelpVideo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            mail2.LinkVisited = true;
+            Process.Start("https://www.bilibili.com/video/av48417721");
+        }
     }
 }

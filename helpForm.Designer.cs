@@ -36,6 +36,8 @@
             this.mail1 = new System.Windows.Forms.LinkLabel();
             this.mail2 = new System.Windows.Forms.LinkLabel();
             this.notice = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.helpVideo = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -116,17 +118,39 @@
             // 
             this.notice.AutoSize = true;
             this.notice.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.notice.Location = new System.Drawing.Point(2, 144);
+            this.notice.Location = new System.Drawing.Point(2, 180);
             this.notice.Name = "notice";
             this.notice.Size = new System.Drawing.Size(631, 15);
             this.notice.TabIndex = 7;
             this.notice.Text = "因本工具为学生自发开发，所以问题只能在周末予以集中处理。给您带来不便敬请谅解！";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 146);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 15);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "使用教程";
+            // 
+            // helpVideo
+            // 
+            this.helpVideo.AutoSize = true;
+            this.helpVideo.Location = new System.Drawing.Point(29, 161);
+            this.helpVideo.Name = "helpVideo";
+            this.helpVideo.Size = new System.Drawing.Size(335, 15);
+            this.helpVideo.TabIndex = 9;
+            this.helpVideo.TabStop = true;
+            this.helpVideo.Text = "https://www.bilibili.com/video/av48417721";
+            this.helpVideo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.HelpVideo_LinkClicked);
             // 
             // helpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 204);
+            this.Controls.Add(this.helpVideo);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.notice);
             this.Controls.Add(this.mail2);
             this.Controls.Add(this.mail1);
@@ -152,5 +176,7 @@
         private System.Windows.Forms.LinkLabel mail1;
         private System.Windows.Forms.LinkLabel mail2;
         private System.Windows.Forms.Label notice;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.LinkLabel helpVideo;
     }
 }
