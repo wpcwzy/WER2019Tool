@@ -264,7 +264,7 @@ namespace WER2019Tool
 
     public partial class network
     {
-        public void upload(string map,string input)
+        public async void uploadAsync(string map,string input)
         {
             int redo = 0;
             MessageBox.Show("恭喜您成功解题！程序将上传您的解题思路至服务器进行统计研究\n若您有什么意见可以在帮助窗口中进行反馈，感谢您的合作。");
@@ -279,8 +279,8 @@ namespace WER2019Tool
                     string url = "http://wpcwzy.top/data/process.php" + postString; //地址
                     Console.WriteLine("Server URL:{0}", url);
                     WebClientEx webClient = new WebClientEx();
-                    webClient.Timeout = 3500;
-                    byte[] responseData = webClient.DownloadData(url); //得到返回字符流
+                    webClient.Timeout = 7000;
+                    var responseData = await webClient.DownloadDataTaskAsync(url); //得到返回字符流
                     string srcString = Encoding.UTF8.GetString(responseData); //解码
                     Console.WriteLine(srcString);
                     break;
@@ -494,7 +494,7 @@ namespace WER2019Tool
                 {
                     Console.WriteLine("Upload!map={0},code={1}", convertMap(), map);
                     codeConverter(false);
-                    network.upload(convertMap(), code);
+                    network.uploadAsync(convertMap(), code);
                 }
                 else
                     Console.WriteLine("Failed,stop upload");
