@@ -21,7 +21,7 @@ namespace WER2019Tool
         Engine engine = new Engine();
         //arrayConverter arrayConverter = new arrayConverter();
         helpForm helpForm = new helpForm();
-        public Sharpbrake.Client.AirbrakeNotifier airbrake = new AirbrakeNotifier(new AirbrakeConfig
+        public AirbrakeNotifier airbrake = new AirbrakeNotifier(new AirbrakeConfig
             {
                 ProjectId = "218700",
                 ProjectKey = "ae9cf7641c1e3299aa86195021f09555"
@@ -85,6 +85,10 @@ namespace WER2019Tool
                 hasClicked = false;
 
             }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("您需要先单击要改变颜色的色块再单击此标签！");
+            }
             catch (Exception ex)
             {
                 var notice = airbrake.BuildNotice(ex);
@@ -97,14 +101,17 @@ namespace WER2019Tool
         private void blueLabel_Click(object sender, EventArgs e)
         {
             try
-            {
+            { 
                 int temp;
                 lastButton.BackColor = Color.Blue;
                 temp = Convert.ToInt16(lastButton.Tag);
                 engine.map[temp] = Color.Blue;
                 engine.nowMap[temp] = Color.Blue;
                 hasClicked = false;
-
+            }
+            catch(NullReferenceException)
+            {
+                MessageBox.Show("您需要先单击要改变颜色的色块再单击此标签！");
             }
             catch (Exception ex)
             {
@@ -125,6 +132,10 @@ namespace WER2019Tool
                 engine.map[temp] = Color.Gray;
                 engine.nowMap[temp] = Color.Blue;
                 hasClicked = false;
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("您需要先单击要改变颜色的色块再单击此标签！");
             }
             catch (Exception ex)
             {
