@@ -354,7 +354,7 @@
             this.help.Name = "help";
             this.help.Size = new System.Drawing.Size(197, 34);
             this.help.TabIndex = 23;
-            this.help.Text = "需要帮助？Need help?";
+            this.help.Text = "帮助&视频教程";
             this.help.UseVisualStyleBackColor = true;
             this.help.Click += new System.EventHandler(this.help_Click);
             // 
