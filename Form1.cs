@@ -341,8 +341,8 @@ namespace WER2019Tool
 
     public partial class Engine
     {
-        public Color[] map = new Color[15] { Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent };
-        public Color[] targetMap = new Color[15] { Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Yellow, Color.Blue, Color.Gray, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent };
+        public Color[] map = new Color[15] { Color.Blue, Color.Yellow,  Color.Gray, Color.Blue, Color.Yellow,  Color.Gray, Color.Blue, Color.Yellow,Color.Gray, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent };
+        public Color[] targetMap = new Color[15] { Color.Blue, Color.Yellow,Color.Gray, Color.Blue, Color.Yellow, Color.Gray, Color.Blue, Color.Yellow, Color.Gray, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent };
         public Color[] nowMap = new Color[15];
         public Color[,] calcMap = new Color[3, 5];
         public Color[] acceptColor = { Color.Yellow, Color.Blue, Color.Blue };
